@@ -3,16 +3,22 @@
     <router-link to="/">Home</router-link> -
     <router-link to="/products">Products</router-link> -
 
-    <router-link to="/basket">Shopping Bag (0)</router-link>
+    <router-link to="/basket"
+      >Shopping Bag ({{ productsInBag.length }})</router-link
+    >
   </div>
   <router-view />
 </template>
 
 <script>
-
 export default {
   created() {
-   this.$store.dispatch('loadProducts')
+    this.$store.dispatch("loadProducts");
+  },
+  computed: {
+    productsInBag() {
+      return this.$store.state.productsInBag;
+    },
   },
 };
 </script>
