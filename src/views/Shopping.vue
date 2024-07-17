@@ -27,7 +27,7 @@
           </div>
         </div>
 
-        <div class="grand-total">Grand Total: US$ 22.30</div>
+        <div class="grand-total">Grand Total: US$ {{ orderTotal() }}</div>
       </template>
       <template v-else>
         <p>Nenhum item adicionado ao carrinho</p>
@@ -42,7 +42,15 @@ export default {
   name: "ShoppingBasket",
   computed: mapState(["productsInBag"]),
 
-  methods: {},
+  methods: {
+    orderTotal() {
+      var total = 0;
+      this.productsInBag.forEach(
+        (item) => (total += item.price * item.quantity)
+      );
+      return total.toFixed(2);
+    },
+  },
 };
 </script>
 
